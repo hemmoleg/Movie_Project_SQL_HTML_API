@@ -1,4 +1,4 @@
-from Movie_Project_SQL_HTML_API.storage.init_db import engine
+from storage.init_db import engine
 from sqlalchemy import text
 
 

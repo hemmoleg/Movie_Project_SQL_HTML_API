@@ -1,4 +1,4 @@
-from Movie_Project_SQL_HTML_API.storage.movie_storage_sql import engine
+from storage.movie_storage_sql import engine
 from sqlalchemy import text
 
 json_file = "../movies.json"

@@ -6,7 +6,7 @@ import os
 import requests
 from requests.exceptions import ConnectionError
 
-from Movie_Project_SQL_HTML_API.storage import user_storage_sql, movie_storage_sql
+from storage import user_storage_sql, movie_storage_sql
 from fuzzywuzzy import process
 
 
