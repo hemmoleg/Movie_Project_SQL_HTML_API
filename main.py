@@ -144,7 +144,7 @@ def print_stats(movies, _):
     :param movies:
     """
     print("Movie statistics")
-    total_rating = sum(movie["rating"] for movie in movies.values())
+    total_rating = sum(float(movie["rating"]) for movie in movies.values())
     avg_rating = round(total_rating / len(movies), 1)
 
     print(f"Average movie rating: {avg_rating}")
@@ -194,7 +194,7 @@ def print_random_movie(movies, _):
     print a random movie
     :param movies:
     """
-    title, info = list(movies.items())[random.randint(0, len(movies))]
+    title, info = list(movies.items())[random.randint(0, len(movies)-1)]
     print(f"Random movie: {title} ({info["year"]}): {info["rating"]}")
     print()
     input("Press Enter to go back to main menu")
@@ -208,9 +208,13 @@ def search_movie(movies, _):
     print("Search movie")
     search_str = get_input(str, "Enter part of the movie name: ")
 
-    if search_str in movies.keys():
-        print(f"Found movie {search_str}: {movies[search_str]}")
-    else:
+    found = False
+    for key, value in movies.items():
+        if search_str.lower() in key.lower():
+            print(f"Found movie: {key}: {value}")
+            found = True
+
+    if not found:
         results = process.extract(search_str, movies.keys())
         results = [item for item in results if item[1] > 49]
 
