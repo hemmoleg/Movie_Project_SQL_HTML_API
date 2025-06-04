@@ -76,7 +76,7 @@ def add_movie(movies, user):
         return
 
     movie_storage_sql.add_movie(title, response["Year"], response["imdbRating"], response["Poster"], user["id"])
-    movies[title] = {"rating": response["imdbRating"],
+    movies[title] = {"rating": float(response["imdbRating"]),
                      "year": response["Year"],
                      "poster": response["Poster"],
                      "user": user["id"]}
@@ -170,7 +170,8 @@ def get_median_movie_rating(movies):
     sorted_ratings = sorted(movie["rating"] for movie in movies.values())
     ratings_amount = len(sorted_ratings)
     if len(sorted_ratings) % 2 == 0:
-        return (sorted_ratings[(ratings_amount // 2) - 1] + sorted_ratings[ratings_amount // 2]) / 2
+        median = (sorted_ratings[(ratings_amount // 2) - 1] + sorted_ratings[ratings_amount // 2]) / 2
+        return round(median, 1)
     else:
         return sorted_ratings[(ratings_amount // 2) + 1]
 
